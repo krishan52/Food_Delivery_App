@@ -72,7 +72,7 @@ const Body = () => {
       </div>
       <div className="rest-cont">
         {filteredRestaurant.map((restaurant) => (
-          <Link
+          <Link className="class-link"
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
