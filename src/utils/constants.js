@@ -1,0 +1,3 @@
+export const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
+export const LOGO_URL = "https://img.freepik.com/premium-photo/man-riding-scooter-with-basket-vegetables_1142157-52265.jpg?size=626&ext=jpg&ga=GA1.1.218943756.1726233115&semt=ais_hybrid";
+export const MENU_API = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7040592&lng=77.10249019999999&restaurantId=";
