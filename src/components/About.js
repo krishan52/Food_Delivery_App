@@ -8,8 +8,8 @@ class About extends React.Component {
     console.log("about constructor called");
   }
 
-  componentDidMount(){
-    console.log("component did mount called");
+  componentDidMount() {
+    console.log("about component did mount called");
   }
 
   render() {

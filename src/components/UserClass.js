@@ -1,42 +1,38 @@
 import User from "./User";
-import { useState } from "react"; 
-import React from "react";  
+import { useState } from "react";
+import React from "react";
 
 class UserClass extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInfo: {
+        name: "sample",
+        location: "default",
+        contact: "any address",
+      },
+    };
+  }
 
-    constructor(props){
-        super(props);
-        this.state = {
-            count: 0,
-        }
-        console.log("user class constructor called");
-    }
+  async componentDidMount() {
+    const data = await fetch("https://api.github.com/users/krishan52");
+    const json = await data.json();
+
+    this.setState({
+      userInfo: json,
+    });
+
+    console.log(json);
+  }
 
   render() {
-    const {name, contact} = this.props;
-    const {count} = this.state;
-    console.log("user class render called");
+    const { name, bio, avatar_url } = this.state.userInfo;
+
     return (
       <div className="user-card">
-        <h1>Count: {count}</h1>
-        <button onClick={()=>{
-            this.setState({
-                count: this.state.count + 1,
-            })
-        }}>Increase Count</button>
-        <button onClick={()=>{
-            this.setState({
-                count: this.state.count - 1,
-            })
-        }}>Decrease Count</button>
-        <button onClick={()=>{
-            this.setState({
-                count: this.state.count = 0,
-            })
-        }}>Reset</button>
+        <img src={avatar_url} className="profile"/>
         <h2>Name: {name}</h2>
-        <h3>Location: Delhi</h3>
-        <h4>Contact: {contact}</h4>
+        <h3>Bio: {bio}</h3>
       </div>
     );
   }

@@ -3,6 +3,7 @@ import resList from "../utils/mockData";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useIsOnline from "../utils/useIsOnline";
 
 const Body = () => {
   // Local State Variable
@@ -30,24 +31,32 @@ const Body = () => {
     );
   };
 
+  const isOnline = useIsOnline();
+
+  if(isOnline === false) return <h1>You're now offline.Please check your internet connection</h1>;
+
   // Conditional Rendering
 
   return listOfRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black mt-1 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+      invalid:border-pink-500 invalid:text-pink-600
+      focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="search-btn"
+            className="px-4 py-2 bg-green-300 border rounded-md m-4 hover:bg-green-500"
             onClick={() => {
               const filteredRestaurant = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -58,8 +67,9 @@ const Body = () => {
             Search
           </button>
         </div>
+        <div className="search m-4 p-4 flex items-center ">
         <button
-          className="filter-btn"
+          className="px-4 py-2 bg-slate-200 rounded-lg hover:bg-slate-400"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRating >= 4
@@ -69,8 +79,9 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
+        </div>
       </div>
-      <div className="rest-cont">
+      <div className="rest-cont flex flex-wrap">
         {filteredRestaurant.map((restaurant) => (
           <Link className="class-link"
             key={restaurant.info.id}

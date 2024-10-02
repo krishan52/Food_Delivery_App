@@ -1,20 +1,26 @@
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import useIsOnline from "../utils/useIsOnline";
 
 const Header = () => {
-  let [btnName, setBtnName] = useState("Login");
+  const [btnName, setBtnName] = useState("Login");
+
+  const isOnline = useIsOnline();
+
   return (
-    <div className="header">
+    <div className="flex justify-between bg-slate-200 shadow-2xl mb-8">
       <div className="logo-container">
-        <Link to="/"><img className="logo" src={LOGO_URL} alt="Scooter with vegetables" /></Link>
+        <Link to="/"><img className="w-56" src={LOGO_URL} alt="Scooter with vegetables" /></Link>
       </div>
-      <div className="nav-items">
-        <ul>
-          <li><Link to="/" className="links">Home</Link></li>
-          <li><Link to="/about" className="links">About Us</Link></li>
-          <li><Link to="/contact" className="links">Contact Us</Link></li>
-          <li><Link to="/cart" className="links">Cart</Link></li>
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4"> 
+          <li className="px-4"><Link to="/" className="links">Home</Link></li>
+          <li className="px-4"><Link to="/grocery" className="links">Grocery Store</Link></li>
+          <li className="px-4"><Link to="/cart" className="links">Cart</Link></li>
+          <li className="px-4">Online Status: {isOnline ? "✅":"🔴"}</li>
+          <li className="px-4"><Link to="/about" className="links">About Us</Link></li>
+          <li className="px-4"><Link to="/contact" className="links">Contact Us</Link></li>
           <button
             className="login"
             onClick={() => {
