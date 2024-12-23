@@ -38,3 +38,11 @@
 * - Address
 * - Contact
 **/
+
+# Redux Toolkit
+- Install redux @reduxjs/toolkit and react-redux
+- Build our Store
+- Connect store to the app
+- Slice (cartSlice)
+- Dispatch(action)
+- Selector
